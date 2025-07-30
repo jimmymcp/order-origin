@@ -1,0 +1,49 @@
+{
+  "id": "16f4bfb2-7be2-4d00-90f8-001547492522",
+  "name": "Order Origin Tests",
+  "publisher": "James Pearson",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher": "Microsoft",
+      "name": "Library Assert",
+      "version": "21.0.0.0"
+    },
+    {
+      "id": "5d86850b-0d76-4eca-bd7b-951ad998e997",
+      "publisher": "Microsoft",
+      "name": "Tests-TestLibraries",
+      "version": "21.0.0.0"
+    },
+    {
+      "id": "c7f567b5-8d5b-40a4-bda1-d4126071b2d7",
+      "name": "Order Origin",
+      "publisher": "James Pearson",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "21.0.0.0",
+  "application": "21.0.0.0",
+  "idRanges": [
+    {
+      "from": 50250,
+      "to": 50299
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://app.com/help/",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "10.0"
+}
