@@ -15,8 +15,8 @@
   "features": [
     "NoImplicitWith"
   ],
-  "platform": "21.0.0.0",
-  "application": "21.0.0.0",
+  "platform": "25.0.0.0",
+  "application": "25.0.0.0",
   "idRanges": [
     {
       "from": 50200,
@@ -29,5 +29,5 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "10.0"
+  "runtime": "14.0"
 }
