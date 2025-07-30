@@ -38,7 +38,7 @@ tableextension 50200 Customer extends Customer
         Customer.SetRange("Bill-to Customer No.", "No.");
         if not Customer.IsEmpty() then
             if ConfirmMgt.GetResponse(StrSubstNo(UpdateOrderOriginOnRelatedCustomersLbl, FieldCaption("Order Origin Code"), Customer.Count()), false) then begin
-                Customer.FindSet(true, false);
+                Customer.FindSet();
                 repeat
                     Customer.Validate("Order Origin Code", "Order Origin Code");
                 until Customer.Next() = 0;
@@ -55,7 +55,7 @@ tableextension 50200 Customer extends Customer
             exit;
 
         SalesHeader.SetRange("Sell-to Customer No.", "No.");
-        if SalesHeader.FindSet(true, false) then
+        if SalesHeader.FindSet() then
             repeat
                 SalesHeader.Validate("Order Origin Code", "Order Origin Code");
                 SalesHeader.Modify();
