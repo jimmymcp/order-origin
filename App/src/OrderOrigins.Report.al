@@ -18,15 +18,4 @@ report 50201 "Order Origins"
             }
         }
     }
-
-    requestpage
-    {
-        layout
-        {
-        }
-
-        actions
-        {
-        }
-    }
 }
