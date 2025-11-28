@@ -22,4 +22,11 @@ page 50200 "Order Origins"
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        OrderOriginAccessMgt: Codeunit "Order Origin Access Mgt.";
+    begin
+        OrderOriginAccessMgt.FilterOrderOrigins(Rec);
+    end;
 }
