@@ -39,7 +39,7 @@ codeunit 50252 "User Order Origin Tests"
         LibraryOrderOrigin.CreateOrderOrigin(OrderOrigin1);
         LibraryOrderOrigin.CreateOrderOrigin(OrderOrigin2);
 
-        UserOrderOrigin."User ID" := CopyStr(UserId(), 1, MaxStrLen(UserOrderOrigin."User ID"));
+        UserOrderOrigin."User ID" := GetCurrentUserID();
         UserOrderOrigin."Order Origin Code" := OrderOrigin1.Code;
         UserOrderOrigin.Insert();
 
@@ -78,7 +78,7 @@ codeunit 50252 "User Order Origin Tests"
     begin
         //[GIVEN] a user with order origin setup
         LibraryOrderOrigin.CreateOrderOrigin(OrderOrigin);
-        UserOrderOrigin."User ID" := CopyStr(UserId(), 1, MaxStrLen(UserOrderOrigin."User ID"));
+        UserOrderOrigin."User ID" := GetCurrentUserID();
         UserOrderOrigin."Order Origin Code" := OrderOrigin.Code;
         UserOrderOrigin.Insert();
 
@@ -113,7 +113,7 @@ codeunit 50252 "User Order Origin Tests"
     begin
         //[GIVEN] a user with order origin setup for a specific origin
         LibraryOrderOrigin.CreateOrderOrigin(OrderOrigin);
-        UserOrderOrigin."User ID" := CopyStr(UserId(), 1, MaxStrLen(UserOrderOrigin."User ID"));
+        UserOrderOrigin."User ID" := GetCurrentUserID();
         UserOrderOrigin."Order Origin Code" := OrderOrigin.Code;
         UserOrderOrigin.Insert();
 
@@ -136,7 +136,7 @@ codeunit 50252 "User Order Origin Tests"
         //[GIVEN] a user with order origin setup for one origin
         LibraryOrderOrigin.CreateOrderOrigin(OrderOrigin1);
         LibraryOrderOrigin.CreateOrderOrigin(OrderOrigin2);
-        UserOrderOrigin."User ID" := CopyStr(UserId(), 1, MaxStrLen(UserOrderOrigin."User ID"));
+        UserOrderOrigin."User ID" := GetCurrentUserID();
         UserOrderOrigin."Order Origin Code" := OrderOrigin1.Code;
         UserOrderOrigin.Insert();
 
@@ -146,5 +146,10 @@ codeunit 50252 "User Order Origin Tests"
 
         // Cleanup
         UserOrderOrigin.Delete();
+    end;
+
+    local procedure GetCurrentUserID(): Code[50]
+    begin
+        exit(CopyStr(UserId(), 1, 50));
     end;
 }

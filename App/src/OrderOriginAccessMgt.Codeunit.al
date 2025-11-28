@@ -39,7 +39,7 @@ codeunit 50201 "Order Origin Access Mgt."
             until UserOrderOrigin.Next() = 0;
 
         if OrderOriginFilter = '' then
-            OrderOrigin.SetFilter(Code, '''')
+            OrderOrigin.SetRange(Code, '')
         else
             OrderOrigin.SetFilter(Code, OrderOriginFilter);
     end;
