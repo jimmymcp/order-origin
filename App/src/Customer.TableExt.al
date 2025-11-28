@@ -8,6 +8,16 @@ tableextension 50200 Customer extends Customer
             Caption = 'Order Origin Code';
             TableRelation = "Order Origin";
 
+            trigger OnLookup()
+            var
+                OrderOrigin: Record "Order Origin";
+                OrderOriginAccessMgt: Codeunit "Order Origin Access Mgt.";
+            begin
+                OrderOriginAccessMgt.FilterOrderOrigins(OrderOrigin);
+                if Page.RunModal(Page::"Order Origins", OrderOrigin) = Action::LookupOK then
+                    Validate("Order Origin Code", OrderOrigin.Code);
+            end;
+
             trigger OnValidate()
             var
                 WillNotRemoveFromOpenDocsLbl: Label 'The %1 will not be removed from any existing documents for this customer.', Comment = '%1 = order origin caption';
