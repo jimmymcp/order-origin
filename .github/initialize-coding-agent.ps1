@@ -104,7 +104,6 @@ $appFolders | ForEach-Object {
     $currentAppFolder = Join-Path ($projectFolder) $_ -Resolve
     $ManifestObject = Get-Content (Join-Path $currentAppFolder "app.json") -Encoding UTF8 | ConvertFrom-Json
     $applicationVersion = $ManifestObject.Application
-    $rulesetFile = Join-Path $currentAppFolder '.vscode\nab.ruleset.json' -Resolve
 
     $packagecachepath = Join-Path $currentAppFolder ".alpackages/"
     if (!(Test-Path -Path $packagecachepath)) {
@@ -173,7 +172,6 @@ $appFolders | ForEach-Object {
             Write-Host "Analyzer not found: $analyzerDllPath"
         }
     }
-    $ParametersList += @(("/ruleset:`"$rulesetFile`" "))
     switch ($_) {
         "App" {
             $compileScript = @"
