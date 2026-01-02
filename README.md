@@ -26,11 +26,14 @@ To create a Business Central container and run the automated tests:
 ### Quick Start (With Internet Access)
 
 ```bash
-# Using bash
+# Using bash (generates secure password automatically)
 ./setup-and-test.sh
 
-# Or using PowerShell
-./setup-and-test.ps1
+# Using PowerShell (generates secure password automatically)
+./setup-and-test.ps1 -accept_eula
+
+# Or set password via environment variable
+BC_PASSWORD='YourSecurePassword' ./setup-and-test.sh
 ```
 
 ### Documentation

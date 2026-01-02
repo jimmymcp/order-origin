@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 # Default values
 CONTAINER_NAME="bcserver"
 USERNAME="admin"
-PASSWORD="P@ssw0rd"
+PASSWORD="${BC_PASSWORD:-}"  # Use environment variable if set
 ARTIFACT_URL=""
 
 # Parse command line arguments
@@ -41,14 +41,18 @@ while [[ $# -gt 0 ]]; do
             echo "Options:"
             echo "  -c, --container NAME    Container name (default: bcserver)"
             echo "  -u, --username USER     Username (default: admin)"
-            echo "  -p, --password PASS     Password (default: P@ssw0rd)"
+            echo "  -p, --password PASS     Password (if not set, a random one will be generated)"
             echo "  -a, --artifact URL      BC artifact URL (optional)"
             echo "  -h, --help              Show this help message"
             echo ""
+            echo "Environment Variables:"
+            echo "  BC_PASSWORD             Set password via environment variable (more secure)"
+            echo ""
             echo "Examples:"
-            echo "  $0"
-            echo "  $0 -c mycontainer -u testuser -p MyPass123"
-            echo "  $0 -a 'https://bcartifacts.azureedge.net/onprem/25.0.0.0/gb'"
+            echo "  $0                                    # Use defaults, generate password"
+            echo "  $0 -c mycontainer -u testuser         # Custom container/user, generate password"
+            echo "  BC_PASSWORD='MyPass123' $0            # Set password via environment"
+            echo "  $0 -a 'https://bcartifacts.../gb'    # Use specific artifact URL"
             exit 0
             ;;
         *)
@@ -97,8 +101,15 @@ if ! pwsh -Command "Import-Module BcContainerHelper -ErrorAction SilentlyContinu
 fi
 echo -e "${GREEN}✓ BcContainerHelper module is available${NC}"
 
+# Generate or validate password
+if [ -z "$PASSWORD" ]; then
+    echo -e "${YELLOW}No password provided. Generating secure random password...${NC}"
+    PASSWORD=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c 16)
+    echo -e "${CYAN}Generated password (save this): $PASSWORD${NC}"
+fi
+
 # Build PowerShell command
-PS_COMMAND="./setup-and-test.ps1 -containerName '$CONTAINER_NAME' -username '$USERNAME' -password '$PASSWORD'"
+PS_COMMAND="./setup-and-test.ps1 -containerName '$CONTAINER_NAME' -username '$USERNAME' -password '$PASSWORD' -accept_eula"
 if [ -n "$ARTIFACT_URL" ]; then
     PS_COMMAND="$PS_COMMAND -artifactUrl '$ARTIFACT_URL'"
 fi

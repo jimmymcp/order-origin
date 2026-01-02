@@ -49,7 +49,20 @@ You can customize these settings as needed:
 ### Option 1: Automatic Artifact Download (Requires Internet)
 
 ```powershell
-./setup-and-test.ps1
+# Generate a random secure password automatically
+./setup-and-test.ps1 -accept_eula
+
+# Or specify a password
+./setup-and-test.ps1 -accept_eula -password "YourSecurePassword"
+```
+
+For bash:
+```bash
+# Generate a random secure password automatically
+./setup-and-test.sh
+
+# Or use environment variable (more secure)
+BC_PASSWORD='YourSecurePassword' ./setup-and-test.sh
 ```
 
 This will:
@@ -65,14 +78,20 @@ This will:
 If you have Business Central artifacts cached locally or want to use a specific version:
 
 ```powershell
-./setup-and-test.ps1 -artifactUrl "https://bcartifacts.azureedge.net/onprem/25.0.0.0/gb"
+./setup-and-test.ps1 -accept_eula -artifactUrl "https://bcartifacts.azureedge.net/onprem/25.0.0.0/gb"
 ```
 
 ### Option 3: Custom Container Name and Credentials
 
 ```powershell
-./setup-and-test.ps1 -containerName "mybc" -username "testuser" -password "MyP@ssw0rd"
+# PowerShell - generates password if not specified
+./setup-and-test.ps1 -accept_eula -containerName "mybc" -username "testuser"
+
+# Bash - use environment variable for password (recommended)
+BC_PASSWORD='MySecureP@ss' ./setup-and-test.sh -c mybc -u testuser
 ```
+
+**Security Note**: The scripts now generate secure random passwords by default if none is provided. This is more secure than using hardcoded passwords.
 
 ## Test Information
 

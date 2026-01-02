@@ -36,10 +36,10 @@
 param(
     [string]$containerName = "bcserver",
     [string]$artifactUrl = "",
-    [switch]$accept_eula = $true,
+    [switch]$accept_eula,
     [string]$auth = "UserPassword",
     [string]$username = "admin",
-    [string]$password = "P@ssw0rd"
+    [string]$password = ""
 )
 
 # Import BcContainerHelper module
@@ -51,6 +51,13 @@ try {
     Write-Error "Failed to import BcContainerHelper module. Please install it first:"
     Write-Error "  Install-Module -Name BcContainerHelper -Force"
     exit 1
+}
+
+# Generate a secure random password if not provided
+if (-not $password) {
+    Write-Host "Generating secure random password..." -ForegroundColor Yellow
+    $password = -join ((48..57) + (65..90) + (97..122) | Get-Random -Count 16 | ForEach-Object { [char]$_ })
+    Write-Host "Generated password (save this for later use): $password" -ForegroundColor Cyan
 }
 
 # Container parameters
@@ -89,7 +96,7 @@ Write-Host "`nCreating Business Central container '$containerName'..." -Foregrou
 Write-Host "This may take 10-20 minutes depending on your network speed..." -ForegroundColor Yellow
 
 $containerParams = @{
-    accept_eula = $accept_eula
+    accept_eula = $accept_eula.IsPresent
     containerName = $containerName
     auth = $auth
     Credential = $credential
