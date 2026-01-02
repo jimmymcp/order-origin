@@ -10,5 +10,32 @@
             "path": "Test"
         }
     ],
-    "settings": {}
+    "settings": {
+        "launch": {
+            "version": "0.2.0",
+            "configurations": [
+                {
+                    "name": "cronus28",
+                    "type": "al",
+                    "request": "launch",
+                    "environmentType": "OnPrem",
+                    "server": "http://cronus28",
+                    "serverInstance": "BC",
+                    "authentication": "UserPassword",
+                    "startupObjectId": 22,
+                    "breakOnError": "All",
+                    "breakOnRecordWrite": "None",
+                    "launchBrowser": false,
+                    "enableSqlInformationDebugger": true,
+                    "enableLongRunningSqlStatements": true,
+                    "longRunningSqlStatementsThreshold": 500,
+                    "numberOfSqlStatements": 10,
+                    "tenant": "default",
+                    "usePublicURLFromServer": true,
+                    "schemaUpdateMode": "ForceSync"
+                }
+            ],
+            "compounds": []
+        }
+    }
 }
